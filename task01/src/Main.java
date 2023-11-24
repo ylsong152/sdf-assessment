@@ -18,37 +18,14 @@ public class Main {
             System.exit(0);
         }
 
-        try(BufferedReader br = new BufferedReader(new FileReader(args[0]))) {
-            String[] headerFields = br.readLine().split(",");
-            List<String> headers = new LinkedList<>();
-            for (int i = 0; i < headerFields.length; i++) {
-                headers.add(headerFields[i]);
-            }
+        try(BufferedReader br = new BufferedReader(new FileReader(args[1]))) {
+            String key = "";
+            String line = "";
 
-            for (String header : headers) {
-                System.out.println(header);
-            }
-
-            String line;
-            Map<Integer, String> fieldsMap = new HashMap<>();
             while ((line = br.readLine()) != null) {
-                String[] fields = line.split(",");
-                // System.out.println(fields[0]);
-                // System.out.println(fields[1]);
-                // System.out.println(fields[2]);
-                // System.out.println(fields[3]);
-                for (int i = 0; i < fields.length; i++) {
-                    fieldsMap.put(i, fields[i]);
-                }
-                for (Integer i : fieldsMap.keySet()) {
-                    Integer key = i;
-                    String value = fieldsMap.get(key);
-                    System.out.println(key + " " + value);
-                }
-        }
-
-          
-
+                key += line;
+            }
+            System.out.println(key);
         } catch (IOException e) {
             e.printStackTrace();
         }

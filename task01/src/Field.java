@@ -10,6 +10,11 @@ public class Field {
         this.thirdField = thirdField;
         this.fourthField = fourthField;
     }
+    
+    public void readFields() {
+        
+    }
+
     public String getFirstField() {
         return firstField;
     }
