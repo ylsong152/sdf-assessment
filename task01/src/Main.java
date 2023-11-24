@@ -21,15 +21,6 @@ public class Main {
             String[] headerFields = csvBR.readLine().split(",");
             for (int i = 0; i < headerFields.length; i++) {
                 headerFields[i] = "__" + headerFields[i] + "__";
-                if (headerFields[i].equals("__price__")) {
-                    headerFields[i] = "$" + headerFields[i] + "!";
-                }
-                if (headerFields[i].equals("__salutations__")) {
-                    headerFields[i] = headerFields[i] + ".";
-                }
-                if (headerFields[i].equals("__last_name__")) {
-                    headerFields[i] = headerFields[i] + ",";
-                }
             }
 
             Map<String, String> csvMap = new HashMap<>();
@@ -47,12 +38,13 @@ public class Main {
                 while ((templateString = txtBR.readLine()) != null) {
                     String[] templateLine = templateString.split(" ");
                     for (int i = 0; i < templateLine.length; i++) {
+                        templateLine[i] = templateLine[i].replaceAll("[^a-zA-Z0-9_ ]", "");
                         for (String key : csvMap.keySet()) {
                             if (templateLine[i].equals(key)) {
                                 templateLine[i] = csvMap.get(key);
                             }
                         }
-                        System.out.print(templateLine[i] + " ");
+                        System.out.printf("%s ",templateLine[i]);
                         if (templateLine[i].isEmpty()) {
                             System.out.println("\n");
                         }
@@ -63,6 +55,5 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
